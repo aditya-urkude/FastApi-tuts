@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import Optional
-
+from pydantic import BaseModel
 app = FastAPI()
 
 #home route
@@ -28,3 +28,14 @@ def stories(limit=10, valid:bool = False, sort:Optional[str]= None):
     else:
         return {"data":f"{limit} invalid stoires in blogs"}
 
+
+# request body 
+class Blog(BaseModel):
+    title : str
+    body : str
+    published_at: Optional[bool]
+
+
+@app.post("/create")
+def crate_blog(request: Blog):
+    return f"My {request.title} is created"
