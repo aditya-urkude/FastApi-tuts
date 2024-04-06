@@ -20,7 +20,7 @@ def about(id):
 def about(id:int):
     return {"id":id}
 
-# query parms
+# query parms, default value, optional parms
 @app.get("/stories")
 def stories(limit=10, valid:bool = False, sort:Optional[str]= None):
     if valid:
