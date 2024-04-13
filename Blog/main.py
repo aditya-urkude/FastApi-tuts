@@ -4,12 +4,14 @@ from .database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from typing import List
-from .routers import user, blog
+from .routers import user, blog,login
 
 app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
+app.include_router(login.router)
 app.include_router(blog.router)
 app.include_router(user.router)
+
 
 
 # # Dependency for db connection
